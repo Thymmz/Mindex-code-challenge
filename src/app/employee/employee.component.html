@@ -1,3 +1,4 @@
+<div class="employee-card">
 <mat-card class="employee">
   <mat-card-header>
     <mat-card-title>{{employee.lastName}}, {{employee.firstName}}</mat-card-title>
@@ -5,8 +6,41 @@
   </mat-card-header>
   <mat-card-content>
     <dl>
-      <dt>Job Title</dt>
       <dd>{{employee.position}}</dd>
+      <dt>Total Number of Reports</dt>
+	    <dd>{{totalEmployeeReports}}</dd>  
     </dl>
+    <!-- <dl>
+      <dt>Reports</dt>
+    </dl> -->
+    <!-- <dl *ngFor="let reporter of reportName">
+      <dd>
+        <div class="reporter-details">
+          {{ reporter["firstName"] }} {{ reporter["lastName"] }},
+          {{ reporter["position"] }}
+        </div>
+      </dd>
+    </dl> -->
   </mat-card-content>
 </mat-card>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Direct Reports</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reporter of reportName">
+      <td>{{reporter.id}}</td>
+      <td>{{reporter.firstName}}</td>
+      <td>{{reporter.lastName}}</td>,
+      <td>{{reporter.position}}</td>
+      <td>
+        <button class="btn btn-info" (click)="update()"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-danger" (click)="delete()"><i class="fa fa-minus"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
