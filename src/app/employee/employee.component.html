@@ -10,17 +10,6 @@
       <dt>Total Number of Reports</dt>
 	    <dd>{{totalEmployeeReports}}</dd>  
     </dl>
-    <!-- <dl>
-      <dt>Reports</dt>
-    </dl> -->
-    <!-- <dl *ngFor="let reporter of reportName">
-      <dd>
-        <div class="reporter-details">
-          {{ reporter["firstName"] }} {{ reporter["lastName"] }},
-          {{ reporter["position"] }}
-        </div>
-      </dd>
-    </dl> -->
   </mat-card-content>
 </mat-card>
 </div>
@@ -32,14 +21,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let reporter of reportName">
-      <td>{{reporter.id}}</td>
-      <td>{{reporter.firstName}}</td>
-      <td>{{reporter.lastName}}</td>,
-      <td>{{reporter.position}}</td>
+    <tr *ngFor="let reportEmp of reportName">
+      <td>{{reportEmp.id}}</td>
+      <td>{{reportEmp.firstName}}</td>
+      <td>{{reportEmp.lastName}}</td>,
+      <td>{{reportEmp.position}}</td>
       <td>
-        <button class="btn btn-info" (click)="update()"><i class="fa fa-edit"></i></button>
-        <button class="btn btn-danger" (click)="delete()"><i class="fa fa-minus"></i></button>
+        <button mat-raised-button class="btn btn-info" (click)="openDialog(reportEmp, 'update')"><i class="fa fa-edit"></i></button>
+        <button mat-raised-button class="btn btn-danger" (click)="openDialog(reportEmp, 'delete')"><i class="fa fa-minus"></i></button>
       </td>
     </tr>
   </tbody>

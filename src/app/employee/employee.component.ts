@@ -1,9 +1,11 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import {Employee} from '../employee';
 import { EmployeeService } from '../employee.service';
 import { Observable, from} from 'rxjs';
 import { flatMap } from 'rxjs/operators';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -17,15 +19,19 @@ export class EmployeeComponent implements OnInit{
   compensation: number;
   totalEmployeeReports: number;
   reportName: Employee[];
+  reportEmp: Employee;
   
-  constructor(private employeeService: EmployeeService) {
+  constructor(
+    private employeeService: EmployeeService,
+    public dialog: MatDialog,
+    ) {
 	  this.totalEmployeeReports = 0; //initialize direct reports
     this.reportName = []
     //console.log(this.reportName)
   }
   ngOnInit(){
 	this.setTotalReports(this.employee); //always run on start to display directReports on cards
-  this.getReports(this.employee);
+  this.getReports(this.employee); //always keep direct reporting employees to supervisor
   }
 
   update(){
@@ -36,6 +42,7 @@ export class EmployeeComponent implements OnInit{
     this.deleterReport.emit(100)
   }
 
+  //set total number of reports for each employee
   setTotalReports(employee: Employee){
 	if(employee.directReports){
 		this.totalEmployeeReports += employee.directReports.length;
@@ -48,15 +55,25 @@ export class EmployeeComponent implements OnInit{
 	}
   }
 
+  //get employee data for the reports directly reporting to each employee
   getReports(employee: Employee){
     if(employee.directReports){
       employee.directReports.forEach((id: number)=>
       this.employeeService.get(id)
-      .subscribe(emp => this.reportName.push(emp),
-      nextEmployee => this.setTotalReports(nextEmployee)
+      .subscribe(emp => this.reportName.push(emp) //push the employee to array of employees reporting to the supervising employee
       )
       )
   }
+  }
+
+  //open dialog on click and send the required
+  openDialog(reporter : Employee, btnType: string){
+    this.reportEmp = reporter
+    let dialogRef = this.dialog.open(DialogComponent, {data : {reporter, updateDelete: btnType}});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      
+    })
   }
 
 }
