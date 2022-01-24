@@ -14,9 +14,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class EmployeeComponent implements OnInit{
   @Input() employee: Employee;
-  @Output() updateCompensation = new EventEmitter<number>();
+  @Output() updateCompensation = new EventEmitter<Employee>();
   @Output() deleterReport = new EventEmitter<number>();
-  compensation: number;
   totalEmployeeReports: number;
   reportName: Employee[];
   reportEmp: Employee;
@@ -34,9 +33,9 @@ export class EmployeeComponent implements OnInit{
   this.getReports(this.employee); //always keep direct reporting employees to supervisor
   }
 
-  update(){
-    this.updateCompensation.emit(100)
-  }
+  // update(){
+  //   this.updateCompensation.emit(100)
+  // }
 
   delete(){
     this.deleterReport.emit(100)
@@ -69,11 +68,22 @@ export class EmployeeComponent implements OnInit{
   //open dialog on click and send the required
   openDialog(reporter : Employee, btnType: string){
     this.reportEmp = reporter
-    let dialogRef = this.dialog.open(DialogComponent, {data : {reporter, updateDelete: btnType}});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      
-    })
+    let dialogRef = this.dialog.open(DialogComponent, 
+      {
+        data : {reporter, updateDelete: btnType
+    }});
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+      if (result.functionalty == 0){
+        console.log(`delete functionality initialed`)
+      }
+      else if (result.functionalty == 1){
+        this.reportEmp.compensation = result.compensation
+        this.updateCompensation.emit(this.reportEmp)
+      }
+      }
+    )
   }
 
 }

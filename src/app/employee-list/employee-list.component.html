@@ -2,7 +2,7 @@
   <mat-grid-tile *ngFor="let emp of employees">
     <app-employee 
     [employee]="emp" 
-    (updateCompensation)="updateReportCompensation($event)"
+    (updateCompensation)="updateReport($event)"
     (deleterReport)="deleteReport($event)"></app-employee>
   </mat-grid-tile>
 </mat-grid-list>

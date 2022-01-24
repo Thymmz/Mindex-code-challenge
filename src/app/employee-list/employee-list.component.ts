@@ -25,12 +25,12 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
-  // private updateReport(employee: Employee){
-  //   this.employeeService.save(employee)
-  //   .subscribe(()=> {},
-  //   catchError(this.handleError.bind(this))
-  //   )
-  // }
+  private updateReport(employee: Employee){
+    this.employeeService.save(employee)
+    .subscribe(()=> {},
+    catchError(this.handleError.bind(this))
+    )
+  }
 
   // private removeReport(employee: Employee){
   //   this.employeeService.remove(employee)
