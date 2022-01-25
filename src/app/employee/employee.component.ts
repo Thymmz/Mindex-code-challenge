@@ -26,30 +26,21 @@ export class EmployeeComponent implements OnInit{
     ) {
 	  this.totalEmployeeReports = 0; //initialize direct reports
     this.reportName = []
-    //console.log(this.reportName)
   }
   ngOnInit(){
-	this.setTotalReports(this.employee, 0); //always run on start to display directReports on cards
+	this.setTotalReports(this.employee); //always run on start to display directReports on cards
   this.getReports(this.employee); //always keep direct reporting employees to supervisor
   }
 
-  // update(){
-  //   this.updateCompensation.emit(100)
-  // }
-
-  // delete(){
-  //   this.deleterReport.emit(100)
-  // }
-
   //set total number of reports for each employee
-  setTotalReports(employee: Employee, totalEmployeeReports : number){
+  setTotalReports(employee: Employee){
 	if(employee.directReports){
-		totalEmployeeReports += employee.directReports.length;
+		this.totalEmployeeReports += employee.directReports.length;
 		from(employee.directReports).pipe(
 			flatMap(id => <Observable<Employee>> 
 			this.employeeService.get(id))
 		).subscribe(
-			nextEmployee => this.setTotalReports(nextEmployee, totalEmployeeReports)
+			nextEmployee => this.setTotalReports(nextEmployee)
 		);
 	}
   }
@@ -64,11 +55,6 @@ export class EmployeeComponent implements OnInit{
       )
       )
   }
-  }
-
-  clearReports(){
-    this.reportName = []
-    this.getReports(this.employee)
   }
 
   deleteEmpReport(reporter : Employee, employee: Employee){
@@ -90,11 +76,10 @@ export class EmployeeComponent implements OnInit{
     dialogRef.afterClosed().subscribe(
       result => {
       if (result.functionalty == 0){
-        //this.clearReports()
         this.deleteEmpReport(this.reportEmp, this.employee)
         this.getReports(this.employee)
-        this.setTotalReports(this.employee, 0)
-        //console.log(this.employee);
+        this.totalEmployeeReports = 0
+        this.setTotalReports(this.employee)
         
       }
       else if (result.functionalty == 1){
