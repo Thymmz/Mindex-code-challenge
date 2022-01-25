@@ -15,11 +15,11 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteEmp(delEmp: Employee, functionalty: boolean){
-    this.dialogRef.close({delEmp, functionalty})
+  deleteEmp(functionalty: boolean){
+    this.dialogRef.close({functionalty})
   }
 
-  updateEmp(updEmp: Employee, compensation: number, functionalty: boolean){
-    this.dialogRef.close({updEmp, compensation, functionalty})
+  updateEmp(compensation: number, functionalty: boolean){
+    this.dialogRef.close({compensation, functionalty})
   }
 }

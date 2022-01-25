@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class EmployeeComponent implements OnInit{
   @Input() employee: Employee;
   @Output() updateCompensation = new EventEmitter<Employee>();
-  @Output() deleterReport = new EventEmitter<number>();
+  @Output() deleteReport = new EventEmitter<number>();
   totalEmployeeReports: number;
   reportName: Employee[];
   reportEmp: Employee;
@@ -37,9 +37,9 @@ export class EmployeeComponent implements OnInit{
   //   this.updateCompensation.emit(100)
   // }
 
-  delete(){
-    this.deleterReport.emit(100)
-  }
+  // delete(){
+  //   this.deleterReport.emit(100)
+  // }
 
   //set total number of reports for each employee
   setTotalReports(employee: Employee){

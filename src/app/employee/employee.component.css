@@ -1,8 +1,5 @@
-mat-card {
+.employee {
   display: block !important;
-  position: relative;
-  top: 100%;
-  width: 100%;
 }
 
 .employee-card {
