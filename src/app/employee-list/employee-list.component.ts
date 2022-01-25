@@ -25,12 +25,21 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
-  private updateReport(employee: Employee){
+  updateReport(employee: Employee){
     this.employeeService.save(employee)
     .subscribe(()=> {},
     catchError(this.handleError.bind(this))
     )
+    this.employeeService.getAll()
   }
+
+  // deleteReport(employee: Employee){
+  //   this.employeeService.save(employee)
+  //   .subscribe(()=> {},
+  //   catchError(this.handleError.bind(this))
+  //   )
+  //   this.employeeService.getAll()
+  // }
 
   // private removeReport(employee: Employee){
   //   this.employeeService.remove(employee)
@@ -48,13 +57,13 @@ export class EmployeeListComponent implements OnInit {
   //   }
   // }
 
-  private updateReportCompensation(val: number){
-      console.log("Event Fired - Update");
-    }
+  // private updateReportCompensation(val: number){
+  //     console.log("Event Fired - Update");
+  //   }
 
-    private deleteReport(val: number){
-      console.log("Event Fired - Delete");
-    }
+  //   private deleteReport(val: number){
+  //     console.log("Event Fired - Delete");
+  //   }
 
   private handleError(e: Error | any): string {
     console.error(e);
