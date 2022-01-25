@@ -2,6 +2,34 @@
   display: block !important;
 }
 
+mat-card-title {
+  color: rgb(45, 78, 139);
+}
+
 .employee-card {
   display: block;
+  width: 97%;
+  padding-left: 1%;
+  margin-top: 2%;
+}
+
+.table-reports {
+  font-family: "Roboto", sans-serif;
+  border-collapse: collapse !important;
+  font-size: 0.95rem;
+  width: 90%;
+  margin-top: 1%;
+  margin-left: 2%;
+  min-width: 400px;
+}
+
+.table-buttons {
+  text-align: right;
+}
+
+.table-reports thead {
+  background-color: gray;
+  color: white;
+  text-align: left;
+  padding: 5%;
 }

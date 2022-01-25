@@ -1,7 +1,12 @@
-.edit-delete-container {
-  padding: 25px;
-  box-shadow: 0 1px 7px -3px black;
+h2 {
+  color: rgb(45, 78, 139) !important;
 }
-.edit-delete-container .mat-form-field {
-  display: block !important;
+
+mat-form-field {
+  display: block;
+  border-top: 1px;
+}
+
+button {
+  margin-left: 12%;
 }

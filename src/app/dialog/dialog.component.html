@@ -1,4 +1,5 @@
-
+<div>
+<div class="update-box">
 <div *ngIf="data.updateDelete === 'delete'">
 <h2 mat-dialog-title>Delete Direct Report</h2>
 <mat-dialog-content>Permanently delete direct report {{data.reporter.firstName}} {{data.reporter.lastName}}?</mat-dialog-content>
@@ -8,9 +9,11 @@
    <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>
 </div>
+</div>
 
-
+<div class="update-box">
 <div *ngIf="data.updateDelete === 'update'">
+  <h2 mat-dialog-title>Update Compensation</h2>
    <form (submit) = "updateEmp(compensation.value, 1)" 
    >
      <mat-form-field>
@@ -58,3 +61,5 @@
      </mat-dialog-actions>
    </form>
  </div>
+</div>
+</div>
