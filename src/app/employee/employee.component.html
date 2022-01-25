@@ -1,25 +1,21 @@
 <div class="employee-card">
 <mat-card class="employee">
   <mat-card-header>
-    <mat-card-title>{{employee.lastName}}, {{employee.firstName}}</mat-card-title>
-    <mat-card-subtitle>{{employee.id}}</mat-card-subtitle>
+    <mat-card-title>{{employee.lastName}} {{employee.firstName}}, {{employee.position}}</mat-card-title>
+    <mat-card-subtitle>Employee ID : {{employee.id}} Direct Reports : {{totalEmployeeReports}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <dl>
-      <dd>{{employee.position}}</dd>
-      <dt>Total Number of Reports</dt>
-	    <dd>{{totalEmployeeReports}}</dd>  
-    </dl>
-  </mat-card-content>
 </mat-card>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Direct Reports</th>
+      <th>Direct Reports(<span>{{totalEmployeeReports}}</span>)</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="totalEmployeeReports == 0">
+      <td>This employee has no reports</td>
+    </tr>
     <tr *ngFor="let reportEmp of reportName">
       <td>{{reportEmp.id}}</td>
       <td>{{reportEmp.firstName}}</td>
@@ -31,6 +27,7 @@
         <button mat-raised-button class="btn btn-danger" (click)="openDialog(reportEmp, 'delete')"><i class="fa fa-minus"></i></button>
       </td>
     </tr>
+
   </tbody>
 </table>
 
