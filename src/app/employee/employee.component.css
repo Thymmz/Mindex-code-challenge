@@ -2,25 +2,37 @@
   display: block !important;
 }
 
+mat-card {
+  padding: 0.5em;
+}
+
 mat-card-title {
   color: rgb(45, 78, 139);
+  padding: 0%;
+}
+
+mat-card-header {
+  text-align: left;
 }
 
 .employee-card {
   display: block;
+  text-align: left;
   width: 97%;
   padding-left: 1%;
-  margin-top: 2%;
+  margin-top: 1.5em;
 }
 
 .table-reports {
   font-family: "Roboto", sans-serif;
   border-collapse: collapse !important;
   font-size: 0.95rem;
-  width: 90%;
+  width: 92%;
   margin-top: 1%;
-  margin-left: 2%;
+  margin-left: 3%;
   min-width: 400px;
+  border: solid black 1px;
+  border-radius: 6px;
 }
 
 .table-buttons {
@@ -31,5 +43,14 @@ mat-card-title {
   background-color: gray;
   color: white;
   text-align: left;
-  padding: 5%;
+  margin: 25%;
+}
+
+td {
+  padding: 0.5rem;
+  border-top: solid black 1px;
+}
+
+tbody {
+  background-color: rgb(225, 227, 231);
 }

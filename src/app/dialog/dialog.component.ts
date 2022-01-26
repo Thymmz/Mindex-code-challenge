@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef  } from '@angular/material/dialog';
-import { Employee } from '../employee';
 
 @Component({
   selector: 'app-dialog',
@@ -15,10 +14,12 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //send result to employee component for delete opertaion
   deleteEmp(functionalty: boolean){
     this.dialogRef.close({functionalty})
   }
 
+  //send result to employee component for update opertaion
   updateEmp(compensation: number, functionalty: boolean){
     this.dialogRef.close({compensation, functionalty})
   }

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {Employee} from '../employee';
 import { EmployeeService } from '../employee.service';
 import { Observable, from} from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, catchError } from 'rxjs/operators';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
@@ -19,6 +19,7 @@ export class EmployeeComponent implements OnInit{
   totalEmployeeReports: number;
   reportName: Employee[];
   reportEmp: Employee;
+  errorMessage: string;
   
   constructor(
     private employeeService: EmployeeService,
@@ -40,7 +41,8 @@ export class EmployeeComponent implements OnInit{
 			flatMap(id => <Observable<Employee>> 
 			this.employeeService.get(id))
 		).subscribe(
-			nextEmployee => this.setTotalReports(nextEmployee)
+			nextEmployee => this.setTotalReports(nextEmployee),
+      catchError(this.handleError.bind(this))
 		);
 	}
   }
@@ -51,12 +53,14 @@ export class EmployeeComponent implements OnInit{
     if(employee.directReports){
       employee.directReports.forEach((id: number)=>
       this.employeeService.get(id)
-      .subscribe(emp => this.reportName.push(emp) //push the employee to array of employees reporting to the supervising employee
+      .subscribe(emp => this.reportName.push(emp), //push the employee to array of employees reporting to the supervising employee
+        catchError(this.handleError.bind(this))
       )
       )
   }
   }
 
+  //Delete the employee id from the list of direct reports and send updated employee to employee list component
   deleteEmpReport(reporter : Employee, employee: Employee){
     if (employee.directReports.includes(reporter.id)){
       const index = employee.directReports.indexOf(reporter.id, 0);
@@ -76,6 +80,7 @@ export class EmployeeComponent implements OnInit{
     dialogRef.afterClosed().subscribe(
       result => {
       if (result.functionalty == 0){
+        //delete the employee from direct reports and re initialize direct reports and total number of direct reports
         this.deleteEmpReport(this.reportEmp, this.employee)
         this.getReports(this.employee)
         this.totalEmployeeReports = 0
@@ -84,10 +89,15 @@ export class EmployeeComponent implements OnInit{
       }
       else if (result.functionalty == 1){
         this.reportEmp.compensation = result.compensation
-        this.updateCompensation.emit(this.reportEmp)
+        this.updateCompensation.emit(this.reportEmp) //Update the employee and send updated employee to employee list component
       }
       }
     )
+  }
+
+  private handleError(e: Error | any): string {
+    console.error(e);
+    return this.errorMessage = e.message || 'Unable to retrieve employees';
   }
 
 }

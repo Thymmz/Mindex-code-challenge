@@ -4,7 +4,7 @@
 <h2 mat-dialog-title>Delete Direct Report</h2>
 <mat-dialog-content>Permanently delete direct report {{data.reporter.firstName}} {{data.reporter.lastName}}?</mat-dialog-content>
 <mat-dialog-content>This action cannot be undone.</mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="delete-buttons">
    <button mat-button (click)="deleteEmp(0)">Delete</button>
    <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

@@ -17,6 +17,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //get a list of all employee objects
     this.employeeService.getAll()
       .pipe(
         reduce((emps, e: Employee) => emps.concat(e), []),
@@ -25,6 +26,7 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
+  //update the information of an employee depending on the employee sent from employee component
   updateReport(employee: Employee){
     this.employeeService.save(employee)
     .subscribe(()=> {},
@@ -32,38 +34,6 @@ export class EmployeeListComponent implements OnInit {
     )
     this.employeeService.getAll()
   }
-
-  // deleteReport(employee: Employee){
-  //   this.employeeService.save(employee)
-  //   .subscribe(()=> {},
-  //   catchError(this.handleError.bind(this))
-  //   )
-  //   this.employeeService.getAll()
-  // }
-
-  // private removeReport(employee: Employee){
-  //   this.employeeService.remove(employee)
-  //   .subscribe(
-  //     () => this.removeReportFromList(employee),
-  //     catchError(this.handleError.bind(this))
-  //   )
-  // }
-
-  // private removeReportFromList(employee: Employee){
-  //   let index = this.employees.indexOf(employee, 0);
-
-  //   if(index > -1){
-  //     this.employees.splice(index, 1)
-  //   }
-  // }
-
-  // private updateReportCompensation(val: number){
-  //     console.log("Event Fired - Update");
-  //   }
-
-  //   private deleteReport(val: number){
-  //     console.log("Event Fired - Delete");
-  //   }
 
   private handleError(e: Error | any): string {
     console.error(e);
